@@ -1,0 +1,71 @@
+@include media-md {
+  .menu-btn {
+    visibility: hidden;
+  }
+
+  .nav {
+    visibility: visible;
+    margin-top: 15px;
+
+    // remove hamburger btn and place links at top for viewport >768px
+    .menu-nav {
+      display: block;
+      height: 100%;
+      text-align: right;
+      background: transparent;
+      transform: translateY(0);
+
+      &__item {
+        display: inline;
+        padding-right: 1.5rem;
+      }
+
+      &__link {
+        display: inline;
+        font-size: 1.25rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+
+  .about__bio {
+    // larger bio font for larger screen
+    font-size: 1.5rem;
+  }
+
+  .projects {
+    &__bio-image {
+      height: 40vh;
+    }
+
+    &__items {
+      // https://bit.ly/3kWXjCK
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .text-secondary {
+      font-size: 3rem;
+    }
+  }
+
+  .contact__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include media-lg {
+  .projects {
+    &__items {
+      // https://bit.ly/3kWXjCK
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@include media-xl {
+  .projects {
+    &__bio-image {
+      height: 50vh;
+    }
+  }
+}

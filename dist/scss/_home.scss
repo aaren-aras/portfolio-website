@@ -1,0 +1,27 @@
+.home {
+  height: 100%;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(
+      to right,
+      rgba($primary-colour, 0.9),
+      rgba($primary-colour, 0.3)
+    ),
+    url("../img/sample.png");
+  background-size: cover;
+  padding-top: 40vh;
+  /* when element's content doesn't fit within its box: https://dev.to/neshaz/the-guide-to-css-overflow-property-mg3  */
+  overflow: hidden;
+
+  &__name {
+    font-size: 5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid set-text-colour($primary-colour);
+    margin-bottom: 1rem; 
+
+    &--last {
+      font-weight: 700;
+      color: $secondary-colour;
+    }
+  }
+}

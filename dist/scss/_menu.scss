@@ -1,0 +1,135 @@
+.menu-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  /* called z-index because it sets order of elements along z-axis (into and out of page) */
+  z-index: 1;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  @include transition-ease;
+
+  &__burger {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    width: 28px;
+    height: 3px;
+    background: set-text-colour($primary-colour);
+    @include transition-ease;
+
+    /* single colon (:) denotes CSS pseudo-selectors: lets you style elements in certain "states" (e.g., hovered over, clicked, etc.) */
+    /* double colon (::) denotes CSS pseudo-elements: lets you style a new element not declared in HTML (e.g., ::before, ::after) */
+    /* ::before lets you insert stuff before some actual element (in this case, <span> with class "menu-btn__burger"); 
+        https://www.youtube.com/watch?v=e1KpKBHJOrA */
+    /* adding top bar of our 3-bar burger menu icon (adding a bar pseudo-element BEFORE our middle (actual, HTML-defined) bar element */
+    &::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      width: 28px;
+      height: 3px;
+      background: set-text-colour($primary-colour);
+      @include transition-ease;
+    }
+
+    // adding bottom bar
+    &::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      width: 20px;
+      height: 3px;
+      background: set-text-colour($primary-colour);
+      @include transition-ease;
+    }
+
+    // animating menu button ("open" = clicked on)
+    &.open {
+      background: transparent;
+      transform: rotate(720deg);
+
+      &::before {
+        transform: rotate(45deg) translate(5px, 8px);
+      }
+
+      &::after {
+        width: 28px;
+        transform: rotate(-45deg) translate(3px, -7px);
+      }
+    }
+  }
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  // viewport width
+  width: 100vw;
+  opacity: 0.98;
+  visibility: hidden;
+
+  &.open {
+    visibility: visible;
+  }
+
+  .menu-nav {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: $primary-colour;
+    padding-right: 1rem;
+    // menu's going to start off the page, then come in from the top once clicked
+    transform: translateY(-100%);
+    list-style-type: none;
+    overflow: hidden;
+    @include transition-ease;
+
+    &.open {
+      // brings them to "initial" position when clicked
+      transform: translateY(0);
+    }
+
+    &__item {
+      // puts links all the way off to right side of page
+      transform: translateX(100vw);
+      @include transition-ease;
+
+      &.open {
+        // brings them to "initial" position when clicked
+        transform: translateX(0);
+      }
+
+      // 1. descendant selector: ">" targets elements that're DIRECT children of ".menu-nav" (&)
+      /* 2. adjacent sibling selector: "+" targets selector coming IMMEDIATELY after first selector,
+        and both are siblings under a common paranet selector */
+      /* 3. general sibling selector: "~" targets all selectors coming after first selector, and both are 
+      siblings under a common parent selector (doesn't have to be immediate/adjacent) */
+      // https://techbrij.com/css-selector-adjacent-child-sibling
+    }
+
+    &__link {
+      display: block;
+      font-size: 2rem;
+      text-transform: uppercase;
+      padding: 2rem 0; // 2rem top and bot, 0 left and right
+      font-weight: 300;
+      @include transition-ease;
+
+      &:hover {
+        color: $secondary-colour;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 4 {
+  // can't just put loop variable i within "nth-child" pre-built func without interpolation
+  .menu-nav__item:nth-child(#{$i}) {
+    // can use i here tho; formula's arbitrary
+    transition-delay: ($i * 0.1s) + 0.15s;
+  }
+}

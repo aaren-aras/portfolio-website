@@ -1,0 +1,45 @@
+$primary-colour: #272727;
+$secondary-colour: #ff652f;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin transition-ease {
+  /* https://www.w3schools.com/css/css3_transitions.asp#:~:text=ease%2Din%20%2D%20specifies%20a%20transition,a%20slow%20start%20and%20end */
+  transition: all 0.25s ease-in-out;
+}
+
+// media queries for RESPONSIVE DESIGN (different viewports)
+@mixin media-md {
+  @media screen and (min-width: 768px) {
+    // directive for removing code duplication and just including whatever code is passed by @include
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media screen and (min-width: 1024px) {
+    // directive for removing code duplication and just including whatever code is passed by @include
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media screen and (min-width: 1600px) {
+    // directive for removing code duplication and just including whatever code is passed by @include
+    @content;
+  }
+}
+
+/* gives appropriate colour for text */
+@function set-text-colour($colour) {
+  /* lightness is pre-built sass func */
+  @if (lightness($colour) > 40%) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}

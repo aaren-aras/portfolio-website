@@ -1,0 +1,64 @@
+/* Create partials for all our elements (especially for large projects) */
+@import "config", "home", "menu", "about", "projects", "contact", "responsive";
+
+body {
+  background: $primary-colour;
+  color: set-text-colour($primary-colour);
+  /* 100% of the available viewport height */
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+a {
+  color: set-text-colour($primary-colour);
+  text-decoration: none;
+}
+
+.text-secondary {
+  color: $secondary-colour;
+}
+
+header {
+  position: fixed;
+  z-index: 2;
+  /* rem based on font size of body (1rem = 1 x body px), nem based on font size of parent */
+  width: 100%;
+  padding: 1rem;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+
+  .social-icons {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  a {
+    padding: 0.4rem;
+    @include transition-ease;
+
+    &:hover {
+      color: $secondary-colour;
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0.4rem;
+  right: 1rem;
+  font-size: 1rem;
+  text-align: right;
+  color: set-text-colour($primary-colour);
+  padding: 1rem;
+}

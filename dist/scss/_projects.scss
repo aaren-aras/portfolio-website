@@ -1,0 +1,107 @@
+.projects {
+  padding-bottom: 2rem;
+
+  &__bio-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    height: 30vh;
+    background: linear-gradient(
+        to right,
+        rgba($primary-colour, 0.9),
+        rgba($primary-colour, 0.3)
+      ),
+      url("../img/sample.png");
+    background-size: cover;
+
+    .text-secondary {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__items {
+    display: grid;
+    // fr = fraction = fraction of available space in grid container
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 60vw;
+    margin: 2rem auto 0 auto;
+  }
+
+  &__item {
+    // need to absolutely position other stuff
+    position: relative;
+    border-bottom: 5px solid $secondary-colour;
+    cursor: pointer;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+
+    &::after {
+      content: "";
+      // reason we have parent container set to relative
+      position: absolute;
+      // pushes all the way to bottom; that's why parent container overflow is hidden (so we don't see this overlay)
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $secondary-colour;
+      opacity: 0;
+      @include transition-ease;
+    }
+
+    &:hover {
+      &::after {
+        top: 0;
+        opacity: 0.9;
+      }
+      .projects__btn {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__btns {
+    display: grid;
+    // 2-column layout (preview on left, github on right); therefore use CSS repeat() func
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+    align-items: center;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+
+  &__btn {
+    color: set-text-colour($secondary-colour);
+    opacity: 0;
+    @include transition-ease;
+
+    &:hover {
+      // orange -> white -> black; TODO: make this function more useful, or just scrap and use $variables
+      color: set-text-colour(set-text-colour($secondary-colour));
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .social-icons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    transform: rotate(90deg) translate(-3rem, -5rem);
+  }
+}
